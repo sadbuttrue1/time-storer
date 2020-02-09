@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -12,5 +12,5 @@ public class Time {
     @Id
     private String id;
 
-    private Date time;
+    private LocalDateTime time;
 }

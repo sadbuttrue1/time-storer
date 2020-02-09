@@ -2,15 +2,15 @@ package me.sadbuttrue.async.producer;
 
 import lombok.AllArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.concurrent.BlockingQueue;
 
 @AllArgsConstructor
 public class TimeProducer implements Runnable {
-    private BlockingQueue<Date> timeQueue;
+    private BlockingQueue<LocalDateTime> timeQueue;
 
     public void run() {
-        var time = new Date();
+        var time = LocalDateTime.now();
         timeQueue.add(time);
     }
 }
