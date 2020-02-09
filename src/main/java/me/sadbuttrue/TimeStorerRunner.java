@@ -17,12 +17,12 @@ public class TimeStorerRunner implements CommandLineRunner, ExitCodeGenerator {
     private int exitCode;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         exitCode = new CommandLine(command, factory).execute(args);
     }
 
     @Override
     public int getExitCode() {
-        return 0;
+        return exitCode;
     }
 }
