@@ -32,7 +32,6 @@ public class TaskManager {
 
     @Scheduled(fixedRate = 100L)
     public void manage() {
-        System.err.println("manager " + executor.getThreadPoolExecutor().getQueue().size());
         if (enabled && executor.getThreadPoolExecutor().getQueue().size() < SEND_THRESHOLD && !timeQueue.isEmpty()) {
             var times = new ArrayList<LocalDateTime>();
             timeQueue.drainTo(times);
