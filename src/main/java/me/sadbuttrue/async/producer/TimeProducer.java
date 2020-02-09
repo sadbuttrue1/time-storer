@@ -1,6 +1,7 @@
 package me.sadbuttrue.async.producer;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +13,14 @@ import java.util.concurrent.BlockingQueue;
 public class TimeProducer {
     private final BlockingQueue<LocalDateTime> timeQueue;
 
+    @Setter
+    private boolean isEnabled = false;
+
     @Scheduled(fixedRate = 1000L)
     public void run() {
-        var time = LocalDateTime.now();
-        timeQueue.add(time);
+        if (isEnabled) {
+            var time = LocalDateTime.now();
+            timeQueue.add(time);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package me.sadbuttrue.async.manager;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import me.sadbuttrue.model.Time;
 import me.sadbuttrue.model.dto.TimeTask;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -22,9 +23,12 @@ public class TaskManager {
 
     private static final int SEND_THRESHOLD = 10;
 
+    @Setter
+    private boolean enabled = false;
+
     @Scheduled(fixedRate = 100L)
     public void manage() {
-        if (taskQueue.size() < SEND_THRESHOLD && !timeQueue.isEmpty()) {
+        if (enabled && taskQueue.size() < SEND_THRESHOLD && !timeQueue.isEmpty()) {
             var times = new ArrayList<LocalDateTime>();
             timeQueue.drainTo(times);
             List<Time> preparedForSaving = times.stream()
