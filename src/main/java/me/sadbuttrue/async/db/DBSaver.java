@@ -7,15 +7,15 @@ import net.jodah.failsafe.Failsafe;
 import net.jodah.failsafe.RetryPolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.concurrent.BlockingQueue;
 
+@Component
 @RequiredArgsConstructor
-public class DBSaver implements Runnable {
+public class DBSaver {
     private Logger logger = LoggerFactory.getLogger(DBSaver.class);
-
-    private final BlockingQueue<TimeTask> taskQueue;
 
     private final TimeRepository repository;
 
@@ -27,24 +27,13 @@ public class DBSaver implements Runnable {
             .onRetry(e -> logger.error("Write to DB failed. Retrying at {}", LocalDateTime.now()))
             .onSuccess(e -> {
                 if (e.getAttemptCount() > 1) {
-                    logger.info("Connection with DB up and running again at #{} after #{} retries",
+                    logger.info("Connection with DB up and running again at {} after {} retries",
                             LocalDateTime.now(), e.getAttemptCount() - 1);
                 }
             });
 
-    @Override
-    public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            try {
-                tryToStore();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-    }
-
-    private void tryToStore() throws InterruptedException {
-        var task = taskQueue.take();
+    @Async("singleThreadExecutor")
+    public void tryToStore(TimeTask task) {
         Failsafe.with(retryPolicy).run(() -> {
             repository.saveAll(task.getTimes());
         });
