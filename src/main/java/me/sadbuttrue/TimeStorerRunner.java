@@ -1,9 +1,11 @@
 package me.sadbuttrue;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.stereotype.Component;
+
 import picocli.CommandLine;
 import picocli.CommandLine.IFactory;
 
@@ -12,7 +14,7 @@ import picocli.CommandLine.IFactory;
 public class TimeStorerRunner implements CommandLineRunner, ExitCodeGenerator {
     private final TimeStorerCommand command;
 
-    private final IFactory factory; // auto-configured to inject PicocliSpringFactory
+    private final IFactory factory;
 
     private int exitCode;
 

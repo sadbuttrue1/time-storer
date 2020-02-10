@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import me.sadbuttrue.async.db.DBSaver;
-import me.sadbuttrue.model.dto.TimeTask;
+import me.sadbuttrue.async.dto.TimeTask;
 
 @Component
 @RequiredArgsConstructor
@@ -20,8 +20,7 @@ public class TaskSubmitter {
 
 	private final DBSaver saver;
 
-
-	@Scheduled(fixedRate = 100L)
+	@Scheduled(fixedRateString = "${me.sadbuttrue.async.submitter.TaskSubmitter.schedulerRate:100L}")
 	public void submit() {
 		TimeTask task = taskQueue.peek();
 		if (task != null) {

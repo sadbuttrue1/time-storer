@@ -1,0 +1,28 @@
+{
+	"properties": [
+		{
+			"name": "me.sadbuttrue.async.producer.TimeProducer.schedulerRate",
+			"type": "java.lang.Long",
+			"description": "Scheduler rate for producer."
+		},
+		{
+			"name": "me.sadbuttrue.async.manager.TaskManager.schedulerRate",
+			"type": "java.lang.Long",
+			"description": "Scheduler rate for manager."
+		},
+		{
+			"name": "me.sadbuttrue.async.submitter.TaskSubmitter.schedulerRate",
+			"type": "java.lang.String",
+			"description": "Scheduler rate for submitter."
+		},
+		{
+			"name": "me.sadbuttrue.async.db.DBSaver.queueCapacity",
+			"type": "java.lang.Integer",
+			"description": "Capacity of queue for saver."
+		},
+		{
+			"name": "me.sadbuttrue.async.manager.TaskManager.sendThreshold",
+			"type": "java.lang.Integer",
+			"description": "Capacity of task queue."
+		}
+	] }

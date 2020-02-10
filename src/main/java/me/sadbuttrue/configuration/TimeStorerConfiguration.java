@@ -10,11 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import me.sadbuttrue.model.dto.TimeTask;
+import me.sadbuttrue.async.dto.TimeTask;
 
 @Configuration
 public class TimeStorerConfiguration {
-
 	@Value("${me.sadbuttrue.async.manager.TaskManager.sendThreshold:10}")
 	private int taskQueueCapacity;
 

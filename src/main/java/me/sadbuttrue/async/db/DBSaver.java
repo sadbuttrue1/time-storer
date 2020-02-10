@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import net.jodah.failsafe.Failsafe;
 import net.jodah.failsafe.RetryPolicy;
 
-import me.sadbuttrue.model.dto.TimeTask;
+import me.sadbuttrue.async.dto.TimeTask;
 import me.sadbuttrue.repository.TimeRepository;
 
 @Component
@@ -22,8 +22,6 @@ public class DBSaver {
 
     private final RetryPolicy<Object> retryPolicy = new RetryPolicy<>()
             .withMaxAttempts(Integer.MAX_VALUE)
-//            not needed, if enabled it'll actually give timeout of mongo timeout (5s) + itself (5s)
-//            .withDelay(Duration.ofSeconds(5L))
             .onFailedAttempt(e -> log.error("Connection attempt failed", e.getLastFailure()))
             .onRetry(e -> log.error("Write to DB failed. Retrying at {}", LocalDateTime.now()))
             .onSuccess(e -> {

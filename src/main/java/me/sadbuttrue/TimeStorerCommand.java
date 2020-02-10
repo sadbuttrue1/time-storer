@@ -1,16 +1,17 @@
 package me.sadbuttrue;
 
-import lombok.RequiredArgsConstructor;
-import me.sadbuttrue.service.StoringService;
-import org.springframework.stereotype.Component;
-import picocli.CommandLine.Option;
-
 import java.util.concurrent.Callable;
+
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.stereotype.Component;
+
+import me.sadbuttrue.service.StoringService;
+import picocli.CommandLine.Option;
 
 @Component
 @RequiredArgsConstructor
 public class TimeStorerCommand implements Callable<Integer> {
-
     private final StoringService storingService;
 
     @Option(names = "-p", description = "Print times from DB")

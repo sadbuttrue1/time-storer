@@ -13,13 +13,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import me.sadbuttrue.async.dto.TimeTask;
 import me.sadbuttrue.model.Time;
-import me.sadbuttrue.model.dto.TimeTask;
 
 @Component
 @RequiredArgsConstructor
 public class TaskManager {
-
     private final BlockingQueue<LocalDateTime> timeQueue;
 
     private final BlockingQueue<TimeTask> taskQueue;
@@ -30,7 +29,7 @@ public class TaskManager {
     @Setter
     private boolean enabled = false;
 
-    @Scheduled(fixedRate = 100L)
+    @Scheduled(fixedRateString = "${me.sadbuttrue.async.manager.TaskManager.schedulerRate:100L}")
     public void manage() {
         if (enabled && taskQueue.size() < sendThreshold && !timeQueue.isEmpty()) {
             var times = new ArrayList<LocalDateTime>();

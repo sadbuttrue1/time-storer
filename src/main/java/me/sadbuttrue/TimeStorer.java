@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @SpringBootApplication
 public class TimeStorer {
-
     public static void main(String[] args) {
         SpringApplication.run(TimeStorer.class, args);
     }
