@@ -35,7 +35,7 @@ public class TimeStorerCommand implements Callable<Integer> {
         if (print) {
             storingService.printStoredTime();
         } else {
-            storingService.startStoringAndWaitForStop();
+            storingService.startStoring();
         }
         return 0;
     }

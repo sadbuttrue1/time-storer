@@ -25,9 +25,8 @@ public class StoringService {
         System.exit(SpringApplication.exit(context));
     }
 
-    public void startStoringAndWaitForStop() {
+    public void startStoring() {
         manager.setEnabled(true);
         producer.setEnabled(true);
     }
-
 }
