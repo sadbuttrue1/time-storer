@@ -1,13 +1,11 @@
 package me.sadbuttrue;
 
-import java.util.concurrent.Callable;
-
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.stereotype.Component;
-
 import me.sadbuttrue.service.StoringService;
+import org.springframework.stereotype.Component;
 import picocli.CommandLine.Option;
+
+import java.util.concurrent.Callable;
 
 @Component
 @RequiredArgsConstructor

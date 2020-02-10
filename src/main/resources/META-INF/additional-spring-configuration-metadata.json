@@ -12,7 +12,7 @@
 		},
 		{
 			"name": "me.sadbuttrue.async.submitter.TaskSubmitter.schedulerRate",
-			"type": "java.lang.String",
+			"type": "java.lang.Long",
 			"description": "Scheduler rate for submitter."
 		},
 		{

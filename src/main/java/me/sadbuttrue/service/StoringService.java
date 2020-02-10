@@ -1,14 +1,12 @@
 package me.sadbuttrue.service;
 
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Service;
-
 import me.sadbuttrue.async.manager.TaskManager;
 import me.sadbuttrue.async.producer.TimeProducer;
 import me.sadbuttrue.repository.TimeRepository;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

@@ -1,18 +1,15 @@
 package me.sadbuttrue.async.db;
 
-import java.time.LocalDateTime;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
+import me.sadbuttrue.async.dto.TimeTask;
+import me.sadbuttrue.repository.TimeRepository;
+import net.jodah.failsafe.Failsafe;
+import net.jodah.failsafe.RetryPolicy;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import net.jodah.failsafe.Failsafe;
-import net.jodah.failsafe.RetryPolicy;
-
-import me.sadbuttrue.async.dto.TimeTask;
-import me.sadbuttrue.repository.TimeRepository;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
