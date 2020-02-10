@@ -2,6 +2,7 @@ package me.sadbuttrue.configuration;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +15,10 @@ import me.sadbuttrue.model.dto.TimeTask;
 @Configuration
 public class TimeStorerConfiguration {
 
-	@Value("${me.sadbuttrue.saver.queueMaxSize:5}")
+	@Value("${me.sadbuttrue.async.manager.TaskManager.sendThreshold:10}")
+	private int MAX_TASK_QUEUE_CAPACITY;
+
+	@Value("${me.sadbuttrue.async.db.DBSaver.queueCapacity:10}")
 	private int queueMaxSize;
 
 	@Bean
@@ -24,11 +28,11 @@ public class TimeStorerConfiguration {
 
 	@Bean
 	public BlockingQueue<TimeTask> createTaskQueue() {
-		return new LinkedBlockingQueue<>();
+		return new LinkedBlockingQueue<>(MAX_TASK_QUEUE_CAPACITY);
 	}
 
 	@Bean("singleThreadExecutor")
-	public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
+	public Executor threadPoolTaskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(1);
 		executor.setMaxPoolSize(1);
