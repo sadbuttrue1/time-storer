@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import me.sadbuttrue.execution.handler.BlockCallerExecutionPolicy;
 import me.sadbuttrue.model.dto.TimeTask;
 
 @Configuration
@@ -34,7 +33,6 @@ public class TimeStorerConfiguration {
 		executor.setCorePoolSize(1);
 		executor.setMaxPoolSize(1);
 		executor.setQueueCapacity(queueMaxSize);
-		executor.setRejectedExecutionHandler(new BlockCallerExecutionPolicy());
 		executor.initialize();
 		return executor;
 	}
