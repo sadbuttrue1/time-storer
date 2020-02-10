@@ -39,10 +39,10 @@ public class TimeProducerIntegrationTest {
     }
 
     @Test
-    public void producerShouldSubmitTimeToQueue() throws InterruptedException {
+    public void producerShouldSubmitTimeToQueue() {
         when(timeQueue.add(any())).thenReturn(true);
 
-        await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);
+        await().pollDelay(1010, TimeUnit.MILLISECONDS).until(() -> true);
 
         verify(timeQueue, atLeast(10)).add(any());
         verify(timeQueue, atMost(11)).add(any());
