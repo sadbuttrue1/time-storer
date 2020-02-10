@@ -32,9 +32,9 @@ public class TimeProducerIntegrationTest {
     }
 
     @Test
-    public void producerShouldBeCalledAtLeast10TimesPer10Seconds() {
+    public void producerShouldBeCalledAtLeast10TimesPer1Seconds() {
         await()
-                .atMost(Duration.of(1, ChronoUnit.SECONDS))
+                .atMost(Duration.of(1050, ChronoUnit.MILLIS))
                 .untilAsserted(() -> verify(producer, atLeast(10)).produce());
     }
 
@@ -42,7 +42,7 @@ public class TimeProducerIntegrationTest {
     public void producerShouldSubmitTimeToQueue() {
         when(timeQueue.add(any())).thenReturn(true);
 
-        await().pollDelay(1010, TimeUnit.MILLISECONDS).until(() -> true);
+        await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);
 
         verify(timeQueue, atLeast(10)).add(any());
         verify(timeQueue, atMost(11)).add(any());
