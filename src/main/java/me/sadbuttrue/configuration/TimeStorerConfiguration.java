@@ -16,10 +16,10 @@ import me.sadbuttrue.model.dto.TimeTask;
 public class TimeStorerConfiguration {
 
 	@Value("${me.sadbuttrue.async.manager.TaskManager.sendThreshold:10}")
-	private int MAX_TASK_QUEUE_CAPACITY;
+	private int taskQueueCapacity;
 
 	@Value("${me.sadbuttrue.async.db.DBSaver.queueCapacity:10}")
-	private int queueMaxSize;
+	private int saverQueueCapacity;
 
 	@Bean
 	public BlockingQueue<LocalDateTime> createTimeQueue() {
@@ -28,7 +28,7 @@ public class TimeStorerConfiguration {
 
 	@Bean
 	public BlockingQueue<TimeTask> createTaskQueue() {
-		return new LinkedBlockingQueue<>(MAX_TASK_QUEUE_CAPACITY);
+		return new LinkedBlockingQueue<>(taskQueueCapacity);
 	}
 
 	@Bean("singleThreadExecutor")
@@ -36,7 +36,7 @@ public class TimeStorerConfiguration {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(1);
 		executor.setMaxPoolSize(1);
-		executor.setQueueCapacity(queueMaxSize);
+		executor.setQueueCapacity(saverQueueCapacity);
 		executor.initialize();
 		return executor;
 	}
